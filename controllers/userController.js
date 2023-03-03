@@ -49,7 +49,6 @@ exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    //validation
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       const error = new Error("ข้อมูลที่ได้รับมาไม่ถูกต้อง");
@@ -58,7 +57,6 @@ exports.login = async (req, res, next) => {
       throw error;
     }
 
-    //check email
     const user = await User.findOne({ email: email });
     if (!user) {
       const error = new Error("ไม่พบผู้ใช้งาน");
@@ -100,9 +98,7 @@ exports.login = async (req, res, next) => {
 exports.updaterole = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const {
-      role,
-    } = req.body;
+    const { role } = req.body;
     const user = await User.findByIdAndUpdate(id, {
       role: role,
     });

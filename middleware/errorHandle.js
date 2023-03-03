@@ -1,10 +1,9 @@
-module.exports = (err,req,res,next,) => {
+module.exports = (err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
 
-    const statusCode = err.statusCode || 500
-
-    res.status(statusCode).json ({
-        status_code : statusCode,
-        message :err.message ,
-        validation:err.validation,
-    })
-}
+  res.status(statusCode).json({
+    status_code: statusCode,
+    message: err.message,
+    validation: err.validation,
+  });
+};

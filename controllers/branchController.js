@@ -2,7 +2,7 @@ const Branch = require("../models/branch");
 const { validationResult, body } = require("express-validator");
 
 exports.index = async (req, res, next) => {
-  const branch = await Branch.find().sort({ _id: -1 });
+  const branch = await Branch.find();
 
   res.status(200).json({
     data: branch,
@@ -32,7 +32,10 @@ exports.show = async (req, res, next) => {
 
 exports.insert = async (req, res, next) => {
   try {
-    const { name, address: { province } } = req.body;
+    const {
+      name,
+      address: { province },
+    } = req.body;
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -48,7 +51,7 @@ exports.insert = async (req, res, next) => {
       error.statusCode = 400;
       throw error;
     }
-    
+
     let branch = new Branch({
       name: name,
       address: {

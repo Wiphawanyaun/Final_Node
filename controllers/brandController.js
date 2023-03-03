@@ -12,9 +12,7 @@ const Model = require("../models/model");
 const config = require("../config/index");
 
 exports.index = async (req, res, next) => {
-  const brands = await Brand.find()
-    .select("name photo")
-    .sort({ _id: -1 });
+  const brands = await Brand.find().select("name photo").sort({ _id: -1 });
 
   const brandWithPhotoDomain = brands.map((brand, index) => {
     return {
@@ -33,7 +31,7 @@ exports.model = async (req, res, next) => {
   const model = await Model.find().populate("brand");
 
   res.status(200).json({
-    data: model
+    data: model,
   });
 };
 
@@ -41,7 +39,9 @@ exports.show = async (req, res, next) => {
   const { id } = req.params;
   const brand = await Brand.findById({
     _id: id,
-  }).populate("model").select('name');
+  })
+    .populate("model")
+    .select("name");
 
   res.status(200).json({
     data: brand,
@@ -50,7 +50,7 @@ exports.show = async (req, res, next) => {
 
 exports.insert = async (req, res, next) => {
   try {
-    const { name,photo } = req.body;
+    const { name, photo } = req.body;
 
     //validation
     const errors = validationResult(req);
@@ -67,7 +67,7 @@ exports.insert = async (req, res, next) => {
       error.statusCode = 400;
       throw error;
     }
-    
+
     let brand = new Brand({
       name: name,
       photo: await saveImageToDisk(photo),
@@ -84,13 +84,10 @@ exports.insert = async (req, res, next) => {
 exports.update = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const {
-      name,
-      photo
-    } = req.body;
+    const { name, photo } = req.body;
     const brand = await Brand.findByIdAndUpdate(id, {
       name: name,
-      photo:photo
+      photo: photo,
     });
     console.log(brand);
 
@@ -122,8 +119,6 @@ exports.destroy = async (req, res, next) => {
     next(error);
   }
 };
-
-
 
 async function saveImageToDisk(baseImage) {
   //หา path จริงของโปรเจค

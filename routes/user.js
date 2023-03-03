@@ -3,9 +3,14 @@ var router = express.Router();
 const userController = require("../controllers/userController");
 const { body } = require("express-validator");
 const passportJWT = require("../middleware/passportJWT");
-const checkAdmin = require("../middleware/checkAdmin")
+const checkAdmin = require("../middleware/checkAdmin");
 
-router.get("/",[passportJWT.isLogin],[checkAdmin.isAdmin], userController.all);
+router.get(
+  "/",
+  [passportJWT.isLogin],
+  [checkAdmin.isAdmin],
+  userController.all
+);
 router.post(
   "/",
   [
@@ -35,17 +40,13 @@ router.post(
       .withMessage("กรุณาป้อนอีเมลด้วย")
       .isEmail()
       .withMessage("รูปแบบอีเมลไม่ถูกต้อง"),
-    body("password")
-      .not()
-      .isEmpty()
-      .withMessage("กรุณาใส่รหัสผ่าน")
+    body("password").not().isEmpty().withMessage("กรุณาใส่รหัสผ่าน"),
   ],
   userController.login
 );
 
 router.put("/:id", userController.updaterole);
 
-
-router.get("/profile",[passportJWT.isLogin],userController.profile)
+router.get("/profile", [passportJWT.isLogin], userController.profile);
 
 module.exports = router;

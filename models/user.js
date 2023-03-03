@@ -19,15 +19,15 @@ const schema = new Schema(
 );
 
 schema.methods.encryptPassword = async function (password) {
-    const salt = await bcrypt.genSalt(5)
-    const hashPassword = await bcrypt.hash(password,salt)
-    return hashPassword
+  const salt = await bcrypt.genSalt(5);
+  const hashPassword = await bcrypt.hash(password, salt);
+  return hashPassword;
 };
 
-schema.methods.checkPassword = async function(password){
-  const isValid = await bcrypt.compare(password,this.password)
-  return isValid
-}
+schema.methods.checkPassword = async function (password) {
+  const isValid = await bcrypt.compare(password, this.password);
+  return isValid;
+};
 
 const user = mongoose.model("User", schema);
 

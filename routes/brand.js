@@ -15,11 +15,8 @@ router.delete("/:id", brandController.destroy);
 
 router.post(
   "/",
-  [
-    body("name").not().isEmpty().withMessage("กรุณาป้อนชื่อแบรนด์ด้วย"),
-  ],
+  [body("name").not().isEmpty().withMessage("กรุณาป้อนชื่อแบรนด์ด้วย")],
   brandController.insert
 );
-
 
 module.exports = router;
