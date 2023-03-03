@@ -8,18 +8,11 @@ const Model = require("../models/model");
 const config = require("../config/index");
 
 exports.index = async (req, res, next) => {
-  const brands = await Brand.find().select("name photo").sort({ _id: -1 });
+  const brands = await Brand.find().select("name").sort({ _id: -1 });
 
-  const brandWithPhotoDomain = brands.map((brand, index) => {
-    return {
-      id: brand._id,
-      name: brand.name,
-      photo: config.DOMAIN + "/images/" + brand.photo,
-    };
-  });
 
   res.status(200).json({
-    data: brandWithPhotoDomain,
+    data: brands,
   });
 };
 
