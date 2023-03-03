@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 const config = require ('./config/index')
 const passport = require('passport')
 
-
+var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/user");
 var branchRouter = require("./routes/branch");
 var brandRouter = require("./routes/brand");
@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(passport.initialize())
 
-
+app.use("/", indexRouter);
 app.use("/user", usersRouter);
 app.use("/branch", branchRouter);
 app.use("/brand", brandRouter);
