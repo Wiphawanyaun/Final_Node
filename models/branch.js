@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const branchSchema = new Schema(
   {
-    name: String, 
+    name: {type: String,require: true, trim: true,unique: true}, 
     address: {
       province: String,
     },
