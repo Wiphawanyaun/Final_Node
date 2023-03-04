@@ -27,7 +27,7 @@ exports.show = async (req, res, next) => {
 
 exports.insert = async (req, res, next) => {
   try {
-    const { name ,price,color} = req.body;
+    const { name ,price,color,brand} = req.body;
 
     //validation
     const errors = validationResult(req);
