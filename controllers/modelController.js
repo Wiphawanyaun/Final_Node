@@ -47,6 +47,8 @@ exports.insert = async (req, res, next) => {
 
     let model = new Model({
       name: name,
+      price: price,
+      color:color
     });
     await model.save();
     res.status(200).json({
