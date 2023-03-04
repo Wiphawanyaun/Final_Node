@@ -2,7 +2,7 @@ const Branch = require("../models/branch");
 const { validationResult, body } = require("express-validator");
 
 exports.index = async (req, res, next) => {
-  const branch = await Branch.find();
+  const branch = await Branch.find().sort({ _id: -1 });
 
   res.status(200).json({
     data: branch,
