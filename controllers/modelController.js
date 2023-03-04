@@ -3,10 +3,9 @@ const { validationResult } = require("express-validator");
 
 const Model = require("../models/model");
 
-const config = require("../config/index");
 
 exports.index = async (req, res, next) => {
-  const models = await Model.find().select("name").sort({ _id: -1 });
+  const models = await Model.find().sort({ _id: -1 });
 
 
   res.status(200).json({
@@ -27,7 +26,7 @@ exports.show = async (req, res, next) => {
 
 exports.insert = async (req, res, next) => {
   try {
-    const { name} = req.body;
+    const { name ,price,color} = req.body;
 
     //validation
     const errors = validationResult(req);
