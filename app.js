@@ -10,6 +10,7 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/user");
 var branchRouter = require("./routes/branch");
 var brandRouter = require("./routes/brand");
+var modelRouter = require("./routes/model");
 
 const errorHandler = require("./middleware/errorHandle");
 
@@ -37,6 +38,7 @@ app.use("/", indexRouter);
 app.use("/user", usersRouter);
 app.use("/branch", branchRouter);
 app.use("/brand", brandRouter);
+app.use("/model", modelRouter);
 
 //ล่างสุดเท่านั้น
 app.use(errorHandler);
