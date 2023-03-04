@@ -1,5 +1,6 @@
 
 const { validationResult } = require("express-validator");
+const brand = require("../models/brand");
 
 const Model = require("../models/model");
 
@@ -47,7 +48,8 @@ exports.insert = async (req, res, next) => {
     let model = new Model({
       name: name,
       price: price,
-      color:color
+      color:color,
+      brand:brand
     });
     await model.save();
     res.status(200).json({
@@ -65,7 +67,8 @@ exports.update = async (req, res, next) => {
     const model = await Model.findByIdAndUpdate(id, {
       name: name,
       price: price,
-      color:color
+      color:color,
+      brand:brand
     });
     console.log(model);
 
